@@ -1,18 +1,22 @@
-# use third-party 'lorem-ipsum' package to generate random words
-from lorem_text import lorem
+import pandas as pd
+#print("Hello, World!")
 
-# The `main` function is the entry-point into the function.
-# It has one optional argument, which carries all the 
-# parameters the function was invoked with.
+df = pd.read_csv('Data/Municipality Contact Details.csv')
+
+#print(df) 
+
 def main(params):
-    words = 10
+  name = params.get("name", "world")
+  greeting = "Hello " + name + "!"
+  
+  df = pd.read_csv('Data/Municipality Contact Details.csv')
 
-    # since functions are invoked through http(s), we return an HTTP response
-    return {
-      "headers": {
-        "Content-Type": "text/plain;charset=utf-8",
-    },
-    "body": lorem.words(words),
-}
+  return {
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        "statusCode": 200,
+        "body": greeting,
+  }
 
-print (main ("null"))
+#print ( main({"name": "world"}) )
