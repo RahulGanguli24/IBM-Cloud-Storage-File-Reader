@@ -1,9 +1,9 @@
 import pandas as pd
-print("Hello, World!")
+#print("Hello, World!")
 
-df = pd.read_csv('Data/Municipality Contact Details.csv')
+#df = pd.read_csv('Data/Municipality Contact Details.csv')
 
-print(df) 
+#print(df) 
 
 def main(params):
   name = params.get("name", "world")
@@ -18,4 +18,4 @@ def main(params):
         "body": greeting,
   }
 
-print ( main({"name": "world"}) )
+#print ( main({"name": "world"}) )
