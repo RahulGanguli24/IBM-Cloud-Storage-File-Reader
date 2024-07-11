@@ -16,7 +16,7 @@ def main(params):
             "Content-Type": "application/json",
         },
         "statusCode": 200,
-        "body": greeting,
+        "body": "Total Rows: " + str(pd.options.display.max_rows),
   }
 
 #print ( main({"name": "world"}) )
