@@ -9,9 +9,10 @@ df = pd.read_csv('Data/Municipality Contact Details.csv')
 
 def main(params):
   name = params.get("name", "world")
+  bucket = params.get("bucket", "s3")
   greeting = "Hello " + name + "!"
 
-  get_buckets()
+  bucketstring = get_buckets()
   
   df = pd.read_csv('Data/Municipality Contact Details.csv')
 
@@ -20,7 +21,7 @@ def main(params):
             "Content-Type": "application/json",
         },
         "statusCode": 200,
-        "body": "Total Rows: " + str(pd.options.display.max_rows)+ " --> " + greeting + " --> " ,
+        "body": "Total Rows: " + str(pd.options.display.max_rows)+ " --> " + greeting + " --> " +bucket + " --> " + bucketstring,
   }
 
 def get_cos_client():
@@ -42,9 +43,12 @@ def get_buckets():
     print("Retrieving list of buckets")
     cos_client = get_cos_client()
     try:
+        bucketstring = "Buckets: "
         buckets = cos_client.list_buckets()
         for bucket in buckets["Buckets"]:
             print("Bucket Name: {0}".format(bucket["Name"]))
+            bucketstring = bucket["Name"] + " "
+        return bucketstring
     except ClientError as be:
         print("CLIENT ERROR: {0}\n".format(be))
     except Exception as e:
